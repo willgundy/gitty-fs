@@ -26,8 +26,8 @@ describe('backend-express-template routes', () => {
 
     expect(res.body).toEqual({
       id: expect.any(String),
-      username: 'fake_github_user',
-      email: 'not-real@example.com',
+      username: 'test_user',
+      email: 'test@test.com',
       avatar: expect.any(String),
       iat: expect.any(Number),
       exp: expect.any(Number),
