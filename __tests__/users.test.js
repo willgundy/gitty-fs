@@ -18,7 +18,7 @@ describe('backend-express-template routes', () => {
     );
   });
 
-  it('should login and redirect user to dashboard upon success', async () => {
+  it('should login and redirect new Github user', async () => {
     const res = await request
       .agent(app)
       .get('/api/v1/github/callback?code=42')
@@ -27,6 +27,8 @@ describe('backend-express-template routes', () => {
     expect(res.body).toEqual({
       id: expect.any(String),
       username: 'test_user',
+      exp: expect.any(Number),
+      iat: expect.any(Number),
       email: 'test@test.com',
       avatar: expect.any(String),
     });
