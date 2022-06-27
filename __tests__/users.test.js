@@ -45,7 +45,7 @@ describe('backend-express-template routes', () => {
     const res = await agent.get('/api/v1/posts');
     expect(res.status).toEqual(200);
 
-    const loggedOut = await agent.delete('/api/v1/github');
+    const loggedOut = await agent.delete('/api/v1/github/sessions');
 
     expect(loggedOut.body).toEqual({
       message: 'Signed out successfully!',
