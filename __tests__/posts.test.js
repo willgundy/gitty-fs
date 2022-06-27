@@ -6,7 +6,8 @@ const app = require('../lib/app');
 jest.mock('../lib/services/github');
 
 const githubLogin = async () => {
-  await request.agent(app).get().get('/api/v1/github/callback?code=42').redirects(1);
+  const agent = request.agent(app);
+  await agent.get('/api/v1/github/callback?code=42').redirects(1);
   return [agent];
 }
 

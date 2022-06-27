@@ -13,7 +13,9 @@ CREATE TABLE github_users (
 
 CREATE TABLE posts (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "userId" BIGINT NOT NULL,
-  post TEXT,
-  FOREIGN KEY ("userId") REFERENCES github_users(id)
+  post TEXT
 );
+
+INSERT INTO github_users (username, email, avatar) VALUES ('test user', 'email@test.com', '');
+
+INSERT INTO posts (post) VALUES ('test');
