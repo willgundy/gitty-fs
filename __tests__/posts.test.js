@@ -25,6 +25,18 @@ describe('backend-express-template routes', () => {
     const [agent] = await githubLogin();
     const res = await agent.get('/api/v1/posts');
     expect(res.status).toEqual(200);
+    expect(res.body.length).toEqual(1);
+  });
+
+  it('should not allow users who are not logged in to create posts', async () => {
+    const res = await request(app).post('/api/v1/posts').send({ post: 'test' });
+    expect(res.status).toEqual(401);
+  });
+
+  it('should allow users who are logged in to create posts', async () => {
+    const [agent] = await githubLogin();
+    const res = await agent.post('/api/v1/posts').send({ post: 'test' });
+    expect(res.status).toEqual(200);
   });
 
   afterAll(() => {
