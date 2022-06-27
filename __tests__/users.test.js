@@ -5,6 +5,12 @@ const app = require('../lib/app');
 
 jest.mock('../lib/services/github');
 
+const githubLogin = async () => {
+  const agent = request.agent(app);
+  await agent.get('/api/v1/github/callback?code=42').redirects(1);
+  return [agent];
+}
+
 describe('backend-express-template routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -31,6 +37,19 @@ describe('backend-express-template routes', () => {
       iat: expect.any(Number),
       email: 'test@test.com',
       avatar: expect.any(String),
+    });
+  });
+
+  it('should remove user session on calling delete', async () => {
+    const [agent] = await githubLogin();
+    const res = await agent.get('/api/v1/posts');
+    expect(res.status).toEqual(200);
+
+    const loggedOut = await agent.delete('/api/v1/github');
+
+    expect(loggedOut.body).toEqual({
+      message: 'Signed out successfully!',
+      success: true
     });
   });
 
