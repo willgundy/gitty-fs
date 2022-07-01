@@ -9,7 +9,7 @@ const githubLogin = async () => {
   const agent = request.agent(app);
   await agent.get('/api/v1/github/callback?code=42').redirects(1);
   return [agent];
-}
+};
 
 describe('backend-express-template routes', () => {
   beforeEach(() => {

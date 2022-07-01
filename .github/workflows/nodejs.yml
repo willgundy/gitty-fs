@@ -23,4 +23,4 @@ jobs:
           COOKIE_NAME: ${{ secrets.COOKIE_NAME }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
+          REDIRECT_URL: ${{ secrets.REDIRECT_URL }}
